@@ -8,5 +8,6 @@ describe('Testes da função HandlerElephants', () => {
     expect(handlerElephants(1)).toBe('Parâmetro inválido, é necessário uma string');
     expect(handlerElephants('location')).toBe('NW');
     expect(handlerElephants()).toBeUndefined();
+    expect(handlerElephants('1223')).toBeNull();
   });
 });
