@@ -20,19 +20,22 @@ const daysZoo = (stringDay) => {
   return { [stringDay]: result[stringDay] };
 };
 
+const getScheduleResult = (daySpecific, weekDaysSpecie) => {
+  if (daySpecific) {
+    return daysZoo(daySpecific);
+  }
+  return weekDaysSpecie.availability;
+};
+
 const getSchedule = (scheduleTarget) => {
   const daySpecific = Object.keys(data.hours).find((day) => day === scheduleTarget);
   const weekDaysSpecie = data.species.find((specie) => specie.name === scheduleTarget);
-  
   if (!scheduleTarget || (!daySpecific && !weekDaysSpecie)) {
     return daysZoo();
-  } 
-  
-  if (scheduleTarget === 'Monday') {
+  } if (scheduleTarget === 'Monday') {
     return daysZoo('Monday');
   }
-
-  return daySpecific ? daysZoo(daySpecific) : weekDaysSpecie.availability;
+  return getScheduleResult(daySpecific, weekDaysSpecie);
 };
 
 module.exports = getSchedule;
